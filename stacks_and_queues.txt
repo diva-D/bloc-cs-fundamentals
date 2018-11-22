@@ -1,0 +1,74 @@
+#### Exercises
+
+> 1. What is the main difference between a stack and a queue?
+
+A: The main difference is in what method they use to arrange elements. A stack uses the LIFO method (Last In, First Out). A queue uses the FIFO method (First In, First Out).
+
+
+> 2. What are the similarities between stacks and queues?
+
+A: They both arrange elements into a list. They both handle elements one at a time.
+
+
+> 3. Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+
+A: For the UNDO option I would use a stack. The reason being you want that LIFO method where the last thing changed (e.g. typing a word) is the first thing out (pressing UNDO to remove the typing).
+
+For the REDO I would also use a stack. You want to again use the LIFO method where the last thing you did is the first thing put back.
+
+It wouldn't make any sense for either option to have the very first thing you do be undone or redone. When you use those options you want it to move back in time from the last thing you did to the first, and not from the first to the last.
+
+
+#### Programming Questions
+
+> 1. Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+A:
+
+function reverseString(string) {
+    let reversedArray = [];
+    let stringArray = string.split('');
+    for (let i = stringArray.length; i > 0; i--) {
+        let lastLetter = stringArray.pop();
+        reversedArray.push(lastLetter);
+    }
+    const reversedString = reversedArray.join('');
+    return reversedString;
+}
+
+> 2. Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+
+> To delete an item, take all of the elements in the queue one at a  
+> time and put them at the end of the queue, except for the last one 
+> which should be removed and returned."
+
+A:
+
+function queuePop(list) {
+    /* 
+    ending loop at second to last element so the last element stays at the start of the list after the loop ends    
+    */
+    for (let i = 0; i < list.length - 1; i++) {
+        let firstElement = list.shift()
+        list.push(firstElement);
+    }
+    const lastElement = list.shift();
+    return lastElement;
+}
+
+> 3. Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+
+A: 
+
+class Queue {
+    
+    enqueue(element) {
+        this.list.push(element);
+    }
+
+    dequeue() {
+        const firstElement = this.list.shift();
+        return firstElement;
+    }
+
+}
