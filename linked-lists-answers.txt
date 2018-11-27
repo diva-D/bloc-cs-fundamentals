@@ -50,20 +50,27 @@ Output: a -> c -> d
 A:
 
 function removedDuplicates(headNode) {
-    let uniques = [];
-    let previousNode;
-    let currentNode = headNode;
-    while (currentNode !== null ) {
-        if (uniques.indexOf(currentNode.value) === -1 ) {
-            uniques.push(currentNode.value);
-            previousNode = currentNode;
+    let checkedNode = headNode;
+    let previousNode = headNode;
+    let currentNode = headNode.next;
+
+    /*
+    Goes through each node and compares to rest of linked list.
+    If another node matches the node being checked, then we remove it
+    by setting the previous node's 'next' property to the current node's next node,
+    effectively removing it from the list
+    */
+    
+    while (checkedNode !== null) {
+        while (currentNode !== null) {
+            if (currentNode.value === checkedNode.value) {
+                previousNode.next = currentNode.next;
+            }
             currentNode = currentNode.next;
-        } else {
-            currentNode = currentNode.next;
-            previousNode.next = currentNode;
         }
+        checkedNode = checkedNode.next;
     }
-}
+
 
 > 3. Given an unsorted singly linked list, reverse it.
 Example
