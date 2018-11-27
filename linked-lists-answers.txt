@@ -54,8 +54,8 @@ function removedDuplicates(headNode) {
     let previousNode;
     let currentNode = headNode;
     while (currentNode !== null ) {
-        if (uniques.indexOf(currentNode) === -1 ) {
-            uniques.push(currentNode);
+        if (uniques.indexOf(currentNode.value) === -1 ) {
+            uniques.push(currentNode.value);
             previousNode = currentNode;
             currentNode = currentNode.next;
         } else {
