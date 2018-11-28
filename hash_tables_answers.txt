@@ -68,7 +68,7 @@ class CustomerTable {
             this.storage[index] = bucket;
         }
 
-        bucket.push([phoneNumber, [name, address]]);
+        bucket.push({'phoneNumber': phoneNumber, 'name': name, 'address': address});
     }
 
     retrieve(phoneNumber) {
@@ -81,8 +81,8 @@ class CustomerTable {
 
         for (let i = 0; i < bucket.length; i++) {
             let tuple = bucket[i];
-            if (tuple[0] === phoneNumber) {
-                return tuple[1];
+            if (tuple.phoneNumber === phoneNumber) {
+                return tuple;
             }
         }
 
@@ -90,7 +90,6 @@ class CustomerTable {
     }
 
     hashFunc(phoneNumber, max) {
-        let numberString = phoneNumber.toString();
         let hash = 0;
         for (let i = 0; i < numberString.length; i++) {
             let letter = numberString[i];
@@ -121,7 +120,7 @@ class InventoryTable {
             this.storage[index] = bucket;
         }
 
-        bucket.push([key, [name, stock]]);
+        bucket.push({'key': key, 'name': name, 'stock': stock});
     }
 
     retrieve(key) {
@@ -134,8 +133,8 @@ class InventoryTable {
 
         for (let i = 0; i < bucket.length; i++) {
             let tuple = bucket[i];
-            if (tuple[0] === key) {
-                return tuple[1];
+            if (tuple.key === key) {
+                return tuple;
             }
         }
 
@@ -144,14 +143,14 @@ class InventoryTable {
 
     purchase(key, amount) {
         let item = this.retrieve(key);
-        item[1] += amount;
+        item.stock += amount;
 
         return item;
     }
 
     sell(key, amount) {
         let item = this.retrieve(key);
-        item[1] -= amount;
+        item.stock -= amount;
         
         return item;
     }
@@ -186,7 +185,7 @@ class NewspaperTable {
             this.storage[index] = bucket;
         }
 
-        bucket.push([[publisher, date], data]);
+        bucket.push({'publisher': publisher, 'date': date, 'data': data});
     }
 
     retrieve(publisher, date) {
@@ -199,8 +198,8 @@ class NewspaperTable {
 
         for (let i = 0; i < bucket.length; i++) {
             let tuple = bucket[i];
-            if (tuple[0][0] === publisher && tuple[0][1] === date) {
-                return tuple[1];
+            if (tuple.publisher === publisher && tuple.date === date) {
+                return tuple;
             }
         }
 
