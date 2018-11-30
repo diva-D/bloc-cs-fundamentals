@@ -97,6 +97,76 @@ class BinarySearchTree {
             }
         }
     }
+
+    // Code for problem 1
+    containsValue(value) {
+        let doesContain = false;
+        
+        function search(root) {
+            if (root.value === value) {
+                doesContain = true;
+            } else if (root.right !== null && value > root.value) {
+                return search(root.right);
+            } else if (root.left !== null && value < root.value) {
+                return search(root.left);
+            }
+        }
+        
+        search(this.root);
+
+        return doesContain;
+    }
+
+
+    // Code for problem 2
+
+    distanceBetweenNodes(n1, n2) {
+        
+        // checks values exist in tree
+        if (!this.containsValue(n1) && !this.containsValue(n2)) {
+            return "ERROR: Both nodes not found in tree";
+        } else if (!this.containsValue(n1) && this.containsValue(n2)) {
+            return "ERROR: Node 1 not found in tree";
+        } else if (this.containsValue(n1) && !this.containsValue(n2)) {
+            return "ERROR: Node 2 not found in tree";
+        }   
+        
+        const parentNode = findParentNode(this.root, n1, n2);
+
+        const distance1 = findValueDistance(parentNode, n1);
+        const distance2 = findValueDistance(parentNode, n2);
+        const totalDistance = distance1 + distance2;
+
+        return totalDistance;   
+
+
+        // helper functions
+
+        function findParentNode(parent, n1, n2) {
+            if (n1 < parent.value && n2 < parent.value) {
+                return findParentNode(parent.left, n1, n2);
+            } else if (n1 > parent.value && n2 > parent.value) {
+                return findParentNode(parent.right, n1, n2);
+            } else {
+                return parent;
+            }
+        }
+
+        function findValueDistance(root, node, distance = 0) {
+            let nodeDistance = distance;
+            if (root.value === node) {
+                return nodeDistance;
+            } else if (node < root.value) {
+                nodeDistance++;
+                return findValueDistance(root.left, node, nodeDistance);
+            } else {
+                nodeDistance++;
+                return findValueDistance(root.right, node, nodeDistance);
+            }
+        }
+
+    }
+
 }
 
 // Create tree
@@ -113,24 +183,12 @@ newBinarySearchTree.insert(4);
 newBinarySearchTree.insert(7);
 newBinarySearchTree.insert(13);
 
-// Code for problem 1
-function containsValue(root, value) {
-    if (root === null) {
-        return false;
-    } else if (root.value === value) {
-        return true;
-    } else if (value > root.value) {
-        return containsValue(root.right, value);
-    } else if (value < root.value) {
-        return containsValue(root.left, value);
-    }
-}
 
 // Checking for value 10
-containsValue(newBinarySearchTree.root, 10)
+newBinarySearchTree.containsValue(10);
 
 // Checking for value 23
-containsValue(newBinarySearchTree.root, 23)
+newBinarySearchTree.containsValue(23);
 
 
 > 2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
@@ -141,35 +199,19 @@ A: To solve this I need to find the lowest common parent node. I can do this by 
 
 CODE:
 
-function distanceBetweenNodes(root, n1, n2) {
-    const parentNode = findParentNode(root, n1, n2);
+See above as method of BinarySearchTree class. `distanceBetweenNodes()`
 
-    const distance1 = findValueDistance(parentNode, n1);
-    const distance2 = findValueDistance(parentNode, n2);
-    const totalDistance = distance1 + distance2;
+TESTS
 
-    return totalDistance;   
-}
+// Check distance between 4 and 10
+newBinarySearchTree.distanceBetweenNodes(4, 10);
 
-function findParentNode(parent, n1, n2) {
-    if (n1.value && n2.value < parent.value) {
-        return findParentNode(parent.left, n1, n2);
-    } else if (n1.value && n2.value > parent.value) {
-        return findParentNode(parent.right, n1, n2);
-    } else {
-        return parent;
-    }
-}
+// Check distance between 8 and 10
+newBinarySearchTree.distanceBetweenNodes(9, 10);
 
-function findValueDistance(root, node, distance = 0) {
-    let distance = distance;
-    if (root.value === node.value) {
-        return distance;
-    } else if (node.vale < root.value) {
-        distance++;
-        return findValue(root.left, node, distance);
-    } else {
-        distance++;
-        return findValue(root.right, node, distance);
-    }
-}
+// Check distance between 1 and 14
+newBinarySearchTree.distanceBetweenNodes(1, 14);
+
+// Checks if error occurs for value 23
+newBinarySearchTree.distanceBetweenNodes(1, 23);
+
