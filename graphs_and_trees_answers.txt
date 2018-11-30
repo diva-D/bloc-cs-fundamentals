@@ -45,17 +45,92 @@ A: Given how binary search trees are structured, with nodes to the left LESS tha
 
 CODE:
 
+// Creating a binary tree (as requested by grader)
+// Inspired by code at: https://www.geeksforgeeks.org/implementation-binary-search-tree-javascript/
+
+class Node { 
+    constructor(value) { 
+        this.value = value; 
+        this.left = null; 
+        this.right = null; 
+    } 
+} 
+
+class BinarySearchTree {
+    constructor() {
+        this.root = null;
+    }
+
+    insert(value) {
+        let newNode = new Node(value);
+
+        // Checks if there is root node
+        // If not, sets new node as root]
+        // Otherwise adds node to tree
+
+        if (this.root === null) {
+            this.root = newNode; 
+        } else {
+            this.insertNode(this.root, newNode);
+        }
+    }
+
+    insertNode(node, newNode) {
+        // Inserts new node to left if less than node
+        // Either directly if left is empty or passes to left child
+
+        if (newNode.value < node.value) {
+            if (node.left === null) {
+                node.left = newNode;
+            } else {
+                this.insertNode(node.left, newNode);
+            }
+        } 
+        // Does opposite to above
+        // If greater inserts right of node or pass to right child
+
+        else {
+            if (node.right === null) {
+                node.right = newNode;
+            } else {
+                this.insertNode(node.right, newNode);
+            }
+        }
+    }
+}
+
+// Create tree
+const newBinarySearchTree = new BinarySearchTree();
+
+// Add nodes as per image in assignment
+newBinarySearchTree.insert(8);
+newBinarySearchTree.insert(3);
+newBinarySearchTree.insert(10);
+newBinarySearchTree.insert(1);
+newBinarySearchTree.insert(6);
+newBinarySearchTree.insert(14);
+newBinarySearchTree.insert(4);
+newBinarySearchTree.insert(7);
+newBinarySearchTree.insert(13);
+
+// Code for problem 1
 function containsValue(root, value) {
-    if (root.value === value) {
+    if (root === null) {
+        return false;
+    } else if (root.value === value) {
         return true;
-    } else if (root.value === null) {
-        return false
     } else if (value > root.value) {
         return containsValue(root.right, value);
     } else if (value < root.value) {
         return containsValue(root.left, value);
     }
 }
+
+// Checking for value 10
+containsValue(newBinarySearchTree.root, 10)
+
+// Checking for value 23
+containsValue(newBinarySearchTree.root, 23)
 
 
 > 2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
