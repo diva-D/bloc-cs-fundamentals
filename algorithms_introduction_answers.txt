@@ -1,0 +1,109 @@
+#### Exercises
+
+> 1. Using proper pseudo-code, describe the following primitive algorithms:
+
+> Making coffee
+
+A: 
+
+IMPORT Coffee FROM Pantry
+
+FUNCTION makeCoffee(cupsDesired)
+    
+    CALL grindCoffee(cupsDesired)
+    ADD filter to machine filterBasket
+
+    SET targetAmountTBSP = cupsDesired * 1
+    ADD targetAmountTBSP to filter
+
+    SET targetWaterAmountOZ = cupsDesired * 6
+    IF waterReservior < targetWaterAmountOZ THEN
+        WHILE waterReservior < targetWaterAmountOZ
+            ADD 1oz water to waterReservior
+        END WHILE
+    END IF
+
+    PRESS machine startButton
+
+END FUNCTION
+
+FUNCTION grindCoffee(cupsDesired)
+    SET beanAmountTBSP = Coffee beans * (cupsDesired * 2)
+    SET groundCoffee = 0
+
+    ADD beanAmountTBSP to grinder
+    
+    WHILE Coffe bean size is > medium-fine
+        GRIND beans
+        INCREASE groundCoffee amount
+    END WHILE
+
+    RETURN groundCoffee
+
+END FUNCTION
+
+> Washing dishes
+
+A:
+    FUNCTION washDishes(dishes)
+        SET totalDishes = dishes
+
+        CALL prepareForDishes
+
+        WHILE totalDishes amount > 0
+            FOR EACH dish in totalDishes
+                INSERT into water
+                WHILE dish surface is dirty
+                    SCRUB with sponge
+                END WHILE
+                RINSE soap off dish with tap water
+                PLACE dish on drying rack
+            NEXT dish
+        END WHILE
+    END FUNCTION
+
+
+    FUNCTION prepareForDishes
+        PLUG sink
+        SET sink water level = 0
+        FILL sink with hot water UNTIL water level = 30%
+        ADD 1 squirt of dish soap to sink
+        STIR water UNTIL soap bubbles appear
+    END FUNCTION
+
+> A choice of your own.
+
+A: Make peanut butter jelly sandwich
+
+
+IMPORT PeanutButter, Bread FROM Pantry
+IMPORT Jelly FROM Fridge
+IMPORT Knife FROM UtensilDrawer
+
+FUNCTION makePBJ()
+    SET peanutButterTBSP = PeanutButter * 1
+    SET jellyTBSP = Jelly * 1
+    SET breadSlices = Bread * 2
+
+    SPREAD peanutButterTBSP on breadSlices
+    SPREAD jellyTBSP on breadSlices
+    SET sandwich to COMBINE breadSlices
+
+    CUT sandwich at 50%
+
+END FUNCTION
+
+
+
+> 2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+
+A:
+1. McDonalds. They created an algorithm for franchising that has made them the most successful fast food chain in the world. What makes it stand out is that they are able to maintain consistency across all of their stores, ensuring you have the same experience in whatever McDonalds you visit
+
+2. Nike. They have perfected their marketing algorithm in regards to creating a brand that is recgonised and wanted the world over. They consistently have extremely high demand for their shoes and appearal through their powerful marketing.
+
+3. Sonos. They have created the easiest way to listen to your music wirelessly. There is nothing complicated for the end user in connecting and playing their favorite tunes with a Sonos system, making them the world leaders in wireless audio systems.
+
+> 3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+A: An efficient algorithm is one that eliminates any steps not needed for producing the end result. The steps follow a logical order, with each result building on the last. It understands the system it's working in and uses the most effective methods to solve the problem. In the case of running code this means it uses methods that finish in a finite period of time. In the end it should return a result that requires no further manipulation to be useful.
