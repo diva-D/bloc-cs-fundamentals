@@ -1,0 +1,142 @@
+#### Exercises
+
+> 1. What is time complexity and what is its relation to algorithms?
+
+A: Time complexity is a calcuation of how long it will take a function to run. In relation to algorithms it is used to determine the cost of an algorithm, given it's input. We can use this calcuation to determine if we need to optimize an algorithm for faster runtime.
+
+
+> 2. What is runtime?
+
+A: It can either refer to the actual time it takes to run an algorithm, or to it's time complexity.
+
+
+> 3. How is the runtime of an algorithm calculated?
+
+A: You determine the runtimes of each statement in the algorithm. After that you drop any constants and simplify to the largest term.
+
+
+> 4. Name the six types of algorithm growth rates we saw in this checkpoint and list them in order of most efficient to least efficient. Now Google another algorithmic growth rate not covered and place it in the correct spot in your list.
+
+A:
+
+1. Constant Growth Rate
+2. Logarithmic Growth Rate
+3. Linear Growth Rate
+4. Log-Linear Growth Rate
+5. Quadratic Growth Rate
+6. Cubic Growth Rate* 
+7. Exponential Growth Rate
+
+*Not covered in checkpoint
+
+
+> 5. Choose one of the algorithmic growth rates from the last question and make a comparison to a real-life situation.
+
+A: Linear growth rate. For every order Amazon receives it must fulfill each one; whether it only gets 1 or 1 million.
+
+
+> 6. Determine the time complexity of the following snippet of code. It is commonly known as a linear search.
+
+1    FUNCTION linearSearch(array, target)
+2        FOR each number in the array
+3            IF number = target THEN
+4                RETURN true
+5            END IF
+6        END FOR
+7        RETURN false
+8    END FUNCTION
+
+A: 
+
+Calculation:
+    Line 2 = n
+        A For loop will run as many times as inputs it receives, so it calculates to n
+    Line 3 = n
+        Again, this statement will run for each input (n)
+    Line 4 = 1
+        This statement is a constant that will only run once
+    Line 7 = 1
+        This statement is another constant that will only run once
+
+    // initial calculation
+    n + n + 1 + 1
+    // combined
+    2n + 2
+    // drop the constants
+    n
+
+FINAL RESULT: O(n) (Linear)
+
+> 7. Determine the time complexity of the following snippet of code.
+
+1    FUNCTION foo(array)
+2        FOR each number in the array
+3            FOR each number in the array
+4                print "Hello"
+5            END FOR
+6        END FOR
+7    END FUNCTION
+
+A:
+
+Calculation:
+    Line 2 = n
+        A For loop will run as many times as inputs it receives, so it calculates to n
+    Line 3 = n
+        Again, a for loop will run for each input (n). As it's nested it will multiple into the for loop above
+    Line 4 = 1
+        This statement is a constant that will only run once
+
+    // initial calculation
+    n * n + 1
+    // combined
+    n^2 + 1
+    // drop the constants
+    n^2
+
+FINAL RESULT: O(n^2) (Quadratic) 
+
+> 8. Determine the time complexity of the following snippet of code. It is commonly known as the Fibonacci sequence.
+
+1    FUNCTION fibonacci(number)
+2        IF number < 1 THEN
+3            ERROR
+4        ELSE IF number = 1 or 2 THEN
+5            RETURN 1
+6        ELSE
+7            CALL fibonacci WITH number - 2 RETURNING twoBack
+8            CALL fibonacci WITH number - 1 RETURNING oneBack
+9            RETURN twoBack + oneBack
+10        END IF
+11    END FUNCTION
+
+A:
+
+Calculation:
+    Line 2 = 1
+        The if statement runs off a single input (number) so it calculates to 1
+    Line 3 = 1
+        ERROR onlys runs once if called
+    Line 4 = 1
+        Like line 2, this code receives a single input so will calculate to 1
+    Line 5 = 1
+        Like line 3, only runs once if called
+    Line 7 = 2^n
+        As a recursive function, the runtime is exponetial 
+    Line 8 = 2^n
+        Same as line 7
+    Line 9 = 1
+        Return statement will only run once
+
+    // initial calculation
+    1 + 1 + 1 + 1 + 2^n + 2^n + 1
+    // combined
+    4n^2 + 5
+    // drop the constants
+    2^n
+
+FINAL RESULT: O(2^n) (Exponential) 
+
+> 9. Out of the code snippets you just saw, which is the most time efficient?
+
+A: The linear growth one. For that one, each run costs the same. For the quadratic and exponetial ones, each run costs more and more.
