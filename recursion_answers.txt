@@ -1,0 +1,105 @@
+> 1. Define and compare recursion and iteration.
+
+A: Recursion is the process of repeating the same exact steps until a result is reached. When programming this is used by calling the same function within itself until a final result is attained.
+
+
+> 2. Name five algorithms that are commonly implemented by recursion.
+
+A:
+
+1. Factorial
+2. Fibonacci
+3. Maximum
+4. Binary Search
+5. Reversing a string
+
+
+> 3. When should you use recursion, and when should you avoid recursion? Give examples for each.
+
+A: You should use recursion when you have a problem that can be broken into a series of sub-problems that start with known cases. Recursion allows you to solve for very large inputs without having to explictly code for each condition.
+
+You should avoid recursion when there is not a base case the recursion can solve down to. Otherwise the code will run infinitely as there is nothing the function will work down to and stop at. 
+
+
+> 4. Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum, and fibonacci). What is similar, and what is different?
+
+A:
+
+### Factorial
+    Similar
+        - the procedure fails at negative numbers
+        - each solution follows the same process of multiplying each number to get to the final result
+    Different
+        - the iterative solution utlizes a 'results' variable to hold the product of the calculations as you iterate through the numbers
+        - the recursive solution 'recurses' to a solution for each number and the final result is calculated at the end of this process
+
+### Maximum
+    Similar
+        -  They both compare two numbers at a time to determine which is larger.
+    Different
+        - The recursive function goes to the end of the collection and compares from the back forward
+        - The iterative function starts from the front and then compares each number going forward
+
+### Fibonacci
+    Similar
+        - Both set a 'base case' of 1, 1
+    Different
+        - The recursive function starts at the number and works back to the base cases
+        - The iterative function works forward from the base case until it has looped 'n' times
+
+
+> 5. Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+
+A:
+
+function arrayLength(array, index) {
+  index = index || 0;
+
+  if (array[index+1]) {
+    return arrayLength(array, index+1);
+  } else if (index === 0) {
+    return 0;
+  } else {
+    return index + 1;
+  }
+}
+
+
+> 6. A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+
+A:
+
+function isPalindrome(string) {
+    
+    let length = string.length;
+
+    // check if empty or only one letter
+    if (length === 0 || length === 1) {
+        return true;
+    }
+
+    return checkPalindrome(string, 0, length - 1);
+
+    function checkPalindrome(string, first, last) {
+        if (first === last) {
+            return true;
+        }
+
+        if (string[first] !== string[last]) {
+            return false;
+        }
+
+        if (first < last + 1) {
+            return checkPalindrome(string, first + 1, last - 1)
+        }
+
+        return true;
+    }
+    
+}
+
+
+> 7. Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
+
+A: Because if you click the link it will repeat the same search again, thereby "recuring" the same function (search for recursion).
+
